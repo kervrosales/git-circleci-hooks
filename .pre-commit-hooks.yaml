@@ -1,0 +1,9 @@
+---
+
+- id: circleci-config-validate
+  name: CircleCI config validation
+  description: Test if the CircleCI config is well formed.
+  entry: hooks/circleci-config-validate.sh
+  language: script
+
+

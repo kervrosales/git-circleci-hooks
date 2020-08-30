@@ -1,0 +1,12 @@
+executor: main
+working_directory: /home/circleci/project
+steps:
+  - checkout
+  - basic-command
+  - swissknife/build_and_check_circle_config:
+      custom-error-message: Please run "make circle-config" and push up.
+      fail-if-dirty: true
+  - run:
+      name: Run tests
+      command: |
+        echo "This is where tests would run"

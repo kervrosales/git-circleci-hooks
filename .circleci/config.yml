@@ -1,0 +1,33 @@
+commands:
+  basic-command:
+    description: A command
+    steps:
+    - run:
+        command: echo This is where i would setup env.
+        name: Setup env
+executors:
+  main:
+    docker:
+    - image: circleci/node:latest
+jobs:
+  lint-and-test:
+    executor: main
+    steps:
+    - checkout
+    - basic-command
+    - swissknife/build_and_check_circle_config:
+        custom-error-message: Please run "make circle-config" and push up.
+        fail-if-dirty: true
+    - run:
+        command: echo "This is where tests would run"
+        name: Run tests
+    working_directory: /home/circleci/project
+orbs:
+  swissknife: roopakv/swissknife@0.29.0
+version: 2.1
+workflows:
+  main-ci:
+    jobs:
+    - lint-and-test:
+        name: Run lint & test
+
